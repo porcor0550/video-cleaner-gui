@@ -19,7 +19,7 @@ The app features:
 
 ## Installation
 
-Only builds for Windows are available. You will find them on the [Releases page](releases).
+Only builds for Windows are available. You will find them on the [Releases page](https://github.com/porcor0550/video-cleaner-gui/releases).
 
 You have three options:
 
