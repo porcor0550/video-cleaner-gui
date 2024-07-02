@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Cleaner (version 0.1.13)</title>
+  <link rel="stylesheet" href="output.css">
+</head>
+
+<body class="bg-zinc-900 text-zinc-100 flex flex-col h-screen p-6">
+  <div class="container mx-auto flex flex-col h-full">
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <button id="cleanBtn" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded transition-colors duration-300 ease-in-out flex items-center justify-center">
+        <span class="mr-2">🧹</span> Clean files
+      </button>
+      <button id="removeCleanBtn" class="bg-zinc-700 hover:bg-zinc-600 text-zinc-200 font-bold py-3 px-6 rounded transition-colors duration-300 ease-in-out">
+        Remove clean from list
+      </button>
+    </div>
+
+    <div class="flex justify-center mb-6">
+      <label class="inline-flex items-center select-none">
+        <input type="checkbox" id="saveBytes" class="form-checkbox h-4 w-4 text-blue-600 rounded focus:ring-blue-500 border-zinc-700 bg-zinc-700" checked>
+        <span class="ml-2 text-zinc-300 text-sm">Save removed extra bytes</span>
+      </label>
+    </div>
+
+    <div id="dropZone" class="flex-grow bg-zinc-800 rounded-lg p-4 overflow-y-auto border-2 border-dashed border-zinc-600 flex flex-col items-stretch relative">
+      <p id="dropText" class="text-zinc-400 text-center absolute inset-0 flex items-center justify-center p-8">
+        <span class="dropText-custom">Drop MP4, MOV, and WMV video files or folders containing such files here.</span>
+      </p>
+      <div id="fileList" class="hidden w-full">
+        <!-- File list will be populated here -->
+      </div>
+    </div>
+
+    <div class="mt-4 flex justify-between items-center">
+      <p class="text-zinc-400 text-sm">
+        <kbd>CTRL</kbd> + <kbd>R</kbd> to reload the app | <a href="#" id="helpLink" class="text-blue-400 hover:text-blue-300">Help</a>
+      </p>
+      <p class="text-blue-400 text-sm">
+        Total files: <span id="fileCount">0</span>
+      </p>
+    </div>
+  </div>
+
+  <template id="fileTemplate">
+    <div class="flex items-center justify-between py-2 border-b border-zinc-700 last:border-b-0">
+      <div class="flex-1 min-w-0 mr-4">
+        <p class="text-white text-sm font-medium truncate"></p>
+        <p class="text-neutral-400 text-xs"></p>
+      </div>
+      <div class="px-3 py-1 rounded-full text-xs font-medium truncate max-w-[200px]"></div>
+    </div>
+  </template>
+
+  <script src="renderer.js"></script>
+</body>
+
+</html>

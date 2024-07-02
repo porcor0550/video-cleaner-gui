@@ -1,0 +1,86 @@
+{
+  "name": "videocleanergui",
+  "version": "0.1.13",
+  "description": "Extraneous byte remover for MP4, MOV, & WMV video files",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production electron .",
+    "dev": "cross-env NODE_ENV=development tailwindcss -i ./styles.css -o ./output.css && concurrently \"cross-env NODE_ENV=development electron .\" \"tailwindcss -i ./styles.css -o ./output.css --watch\"",
+    "build:css": "tailwindcss -i ./styles.css -o ./output.css --minify",
+    "build": "npm run build:css && cross-env NODE_ENV=production electron-builder --dir --publish never",
+    "build:installer": "npm run build:css && cross-env NODE_ENV=production electron-builder --win nsis --publish never -c.directories.output=dist-installer",
+    "build:portable": "npm run build:css && cross-env NODE_ENV=production electron-builder --win portable --publish never -c.directories.output=dist-portable"
+  },
+  "build": {
+    "appId": "com.porco.videocleanergui",
+    "productName": "VideoCleanerGUI",
+    "compression": "maximum",
+    "asar": true,
+    "files": [
+      "**/*",
+      "!dist",
+      "!dist-installer",
+      "!dist-portable",
+      "!**/*.map",
+      "!package-lock.json",
+      "!readme-title.png",
+      "!screenshot.png",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "artifactName": "${productName}-Setup-${arch}-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${arch}-${version}.${ext}"
+    },
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    }
+  },
+  "author": "porco",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "browser-sync": "^3.0.2",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3",
+    "electron-reloader": "^1.2.3",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.4"
+  }
+}
