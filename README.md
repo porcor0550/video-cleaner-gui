@@ -19,7 +19,7 @@ The app features:
 
 ## Installation
 
-Only builds for Windows are available. You will find them on the [Releases page](/releases).
+Only builds for Windows are available. You will find them on the [Releases page](releases).
 
 You have three options:
 
